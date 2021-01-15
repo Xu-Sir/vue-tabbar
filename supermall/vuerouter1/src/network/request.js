@@ -22,10 +22,12 @@ export function request2(config){
         timeout: 3900
     })
 
-    //2.拦截器拦截请求
+    //2.拦截器拦截请求   拦截最后都要返回数据  否则后面获取不到数据
     //拦截请求  两个参数 一个请求成功， 一个请求失败
     axios4.interceptors.request.use(req => {
         // console.log(req)
+
+        //返回数据
         return req;
     }, err => {
         console.log(err)
@@ -34,6 +36,7 @@ export function request2(config){
      //拦截返回  两个参数  一个响应成功， 一个响应失败
     axios4.interceptors.response.use(res => {
         console.log(res)
+        //仅仅返回data数据， 其他数据是axios生成的  可以无视
         return res.data
     }, err => {
         console.log(err)
