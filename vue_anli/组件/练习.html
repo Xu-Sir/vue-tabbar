@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    <meta charset="utf-8">
+
+    <script src="../gouwuche/js/vue.js"></script>
+
+</head>
+<body>
+    
+    <div id="app">
+
+        <tpl1t :message1="message" @childbuttonp="listenc1(arguments)" ref='aaa'>
+            <div slot="secend">{{message1}}</div>
+            <!-- <div>{{message1}}</div> -->
+            <!-- <div>{{message1}}</div> -->
+        </tpl1t>
+        <!-- <h4>{{message}}</h4> -->
+        <!-- <h4>{{messagetpl1}}</h4> -->
+        <!-- <button @click="clickp1">父按钮</button> -->
+        <!-- <h4>{{message1}}</h4> -->
+
+    </div>
+
+    <template id="tpl1">
+
+        <div>
+            <h4>标题 tpl1</h4>
+            <p>内容 tpl 很多</p>
+            <h4>{{message1}}</h4>
+            <p>内容 tpl 很多很多</p>
+            <p>内容 tpl 很多很多很多</p>
+            <!-- <h4>{{messagetpl1}}</h4> -->
+            <button @click='childbutton'>子组件按钮</button>
+            <br>
+            <slot name='first'>第一</slot>
+            <slot name='secend'>第二</slot>
+            <slot name='third'>第三</slot>
+        </div>
+
+    </template>
+    <template id="tpl2">
+
+        <div>
+            <h4>标题 tpl2</h4>
+            <p>内容 tpl 很多</p>
+            <p>内容 tpl 很多很多</p>
+            <p>内容 tpl 很多很多很多</p>
+        </div>
+
+    </template>
+
+    <script>
+
+        var app = new Vue({
+            el:'#app'
+            ,data:{
+                message:"消息 app",
+                message1:''
+            }
+            ,components:{
+                tpl1t:{
+                    template:'#tpl1'
+                    ,data(){
+                        return {
+                            messagetpl1:"tpl1消息"
+                        }
+                    }
+                    ,props:{//父组件传值给子组件
+                        message1:{
+                            type:String
+                            ,default:"没有传过来"
+                        }
+                    }
+                    ,methods:{
+                        childbutton(){
+                            this.$emit('childbuttonp',this.messagetpl1)
+                            console.log(this.$parent.message)
+                            console.log(this.$root)
+                        }
+                    }
+                }
+            }
+            // ,props:{
+            //     messagetpl1:String
+            // }
+            // ,props:['messagetpl1']
+            ,methods:{
+
+                listenc1(value){
+                    console.log(value[0])
+                    this.message1 = value[0]
+                }
+                ,clickp1(){
+                    // console.log(this.$children[0].messagetpl1)
+                    console.log(this.$refs.aaa.messagetpl1)
+                }
+
+            }
+
+            
+
+
+        })
+
+
+    </script>
+
+
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <script src="../gouwuche/js/vue.js"></script>
+    
+</head>
+<body>
+
+    <div id="app">
+
+        <div>
+
+            <!-- <yft2></yft2> -->
+            <!-- <flmb1></flmb1> -->
+            <flmb2></flmb2>
+        </div>
+    </div>
+    
+    
+<!-- 分离模板写法 -->
+    <script type="text/x-template" id='flmb1'>
+        <div>
+            <h4>标签</h4>
+            <p> 内容有许多</p>
+            <p> 内容有许多222</p>
+            <p> 内容有许多3333</p>
+            <p> 内容有许多44444</p>
+        </div>
+    </script>
+
+    <!-- 分离模板写法 template -->
+
+    <template id="tempfl1">
+        <div>
+            <h4>{{title}}</h4>
+            <p> {{content}}</p>
+            <p> 内容有许多222</p>
+            <p> 内容有许多3333</p>
+            <p> 内容有许多44444</p>
+        </div>
+    </template>
+    <script>
+
+
+        const compC = Vue.extend({//子组件
+            template:`
+                <div>
+                    <h4>标签</h4>
+                    <p> 内容有许多</p>
+                    <p> 内容有许多222</p>
+                    <p> 内容有许多3333</p>
+                    <p> 内容有许多44444</p>
+                </div>
+            `
+        })
+
+        const comt2 = Vue.extend({//父组件
+            template:`
+            <div>
+                <h4>标签2</h4>
+                <p> 内容有许多2</p>
+                <p> 内容有许多222</p>
+                <p> 内容有许多3333</p>
+                <p> 内容有许多44444</p>
+                <compt></compt>
+            </div>
+            `,
+            components:{
+                compt:compC
+            }
+        })
+
+    //    Vue.component("bqcs", compC);
+
+
+    Vue.component("yft1", {//语法糖写法 全局
+        template:`
+        <div>
+            <h4>标签2</h4>
+            <p> 内容有许多2</p>
+            <p> 内容有许多222</p>
+            <p> 内容有许多3333</p>
+            <p> 内容有许多44444</p>
+            <compt></compt>
+        </div>
+        `,
+        components:{
+                compt:compC
+            }
+    })
+
+
+        var vue = new Vue({
+            el:"#app",
+            data:{
+                message:"消息"
+            },
+            components:{//大小写敏感  名称不能用大写，
+                // temp_c:compC
+                compt2:comt2,
+                yft2:{//语法糖写法
+                    template:`
+                        <div>
+                            <h4>标签2</h4>
+                            <p> 内容有许多2</p>
+                            <p> 内容有许多222</p>
+                            <p> 内容有许多3333</p>
+                            <p> 内容有许多44444</p>
+                        </div>
+                    `
+
+                },
+                flmb1:{
+                    template:'#flmb1'//分类模板写法
+                },
+                flmb2:{
+                    template:'#tempfl1',
+                    data(){//为什么data组件必须是个函数，而不是像vue实例那样返回对象，，因为模板返回对象，会是同一个对象，改编其中一个，所有引用模板的地方都会发生相同改变，而返回函数，函数每次调用的时候创建新的对象，不会对所有引用模板的地方发生相同的更改
+                        return{
+                            title : "骠骑",
+                            content : "这是大将军的职衔"
+                        }
+                      
+                    }
+                }
+
+            }
+        })
+
+       
+
+    </script>
+</body>
+
+</html>

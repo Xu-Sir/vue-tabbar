@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <script src="../gouwuche/js/vue.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+
+        <firstfloort ref="aaa"></firstfloort>
+        <h4>{{messagep1}}</h4>
+        <button @click="showmessage1"> 点击按钮</button>
+    </div>
+
+
+    <template id='firstfloor'>
+
+        <div>
+            <h4>标签2</h4>
+            <p> 内容有许多2</p>
+            <p> 内容有许多222</p>
+            <p> 内容有许多3333</p>
+            <p> 内容有许多44444</p>
+        </div>
+    </template>
+
+    <script >
+
+        var apps = new Vue({
+
+            el:'#app',
+            data:{
+             message: 'app的消息'
+             ,messagep1: ''
+
+            },
+            components:{
+                firstfloort:{
+                    template: '#firstfloor'
+                    ,data(){
+                        return {
+                            messagec1: '一级子级组件消息'
+                        }
+                    }
+                }
+               
+            }
+            ,methods:{
+                showmessage1(){
+                    // console.log(this.$children[0].messagec1)//children方式取子组件属性
+                    console.log(this.$refs.aaa.messagec1)//refs方式取值
+                    this.messagep1 = this.$refs.aaa.messagec1
+                }
+            }
+
+        })
+
+    </script>
+
+</body>
+
+</html>

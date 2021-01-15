@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>html.html</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    
+<style>
+    .active1{
+        color:red;
+    }
+
+    .active3{
+        color:red;
+    }
+
+</style>
+
+
+</head>
+<body>
+
+<!-- <button v-on:click="clickButton()">Click Me</button> -->
+
+<div id="vue_det">
+
+    <!-- <button v-on:mouseout="doubclick()"> shuangji 666 </button>
+    <input type='button' v-on:dblclick="doubclick()" value='doubleclick'/>
+    <br><br>
+    <lable for="a1" >修改颜色</lable> -->
+    <!-- <input type="checkbox" name=""  v-model="uss" id="a2"> -->
+    <!-- <br><br> -->
+    <!-- <div v-bind:class="{'classs1':uss}">
+        v-bind:class 指令
+    </div> -->
+    <!-- <h2> {{name}} </h2>
+    <h2  v-once> {{name}} </h2>
+    <h2  v-once> {{addname}} </h2> -->
+
+
+    <!-- <ul>
+    <li v-for = "(item, index) in movice" v-on:click="changeColor(index)"  v-bind:class="{active3:currentIndex == index}">{{index}}-{{item}}</li>
+    </ul> -->
+
+
+
+    <!-- <br> -->
+    <!-- <a v-bind:href="link">切换图片</a>
+    <img  v-bind:src="links" alt="什么是alt"> -->
+
+    <!-- <h4 :class="{active1:isActive1, active2:isActive2}" :style="{fontSize:'20px', backgroundColor:'blue', width:'200px'}">点击后改变颜色</h4>
+    <button v-on:click="butt">按钮</button> -->
+
+<!--     
+    <h6>{{counter}}</h6>
+    <button v-on:keyup="addCounter(counter, $event)">+</button> -->
+<!-- 
+    <div v-on:click="clickdiv">
+        aaaa
+        <button v-on:click.stop="buttonClick">+</button>
+    </div>
+    <form action="baidu.com">
+
+        <button @click.prevent='submitFun'>提交</button>
+    </form> -->
+
+
+   
+    <!-- <span v-if="isUsername">
+        <label for="app1" >邮箱&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="app1" key="email">
+    </span>
+    <span v-else>
+        <label for="app2" >用户名</label>
+        <input type="text" id="app2" key="username">
+    </span> 
+     <span v-show="isShow">
+        <lable for="app3">密码</lable>
+        <input type="text" id="app3" key="password">
+    </span>
+    <button @click="switch1">切换</button> -->
+
+    <!-- <ul v-for="(item, key, index) in user">
+        <li>{{info[index]}} : {{item}}</li>
+    </ul> -->
+<!-- 
+    <ul>
+        <li>姓名: {{user.name}}</li>
+        <li>年龄：{{user.age}}</li>
+        <li>身高：{{user.height}}</li>
+        <li>体重：{{user.weight}}</li>
+    </ul> -->
+    
+    <!-- <ul v-for="(item, index) in movice">
+        <li :class="{active1 : index == currentIndex}">{{item}}</li>
+    </ul> -->
+    <ul>
+        <li v-for="film in movice">{{film}}</li>
+    </ul>
+
+    <button @click="changeMovice">按钮1</button>
+
+
+
+</div>
+
+<!-- 
+    <button >按钮1</button>
+    <button >按钮2</button>
+    <button >按钮3</button>
+    <button >按钮4</button>
+    <button >按钮5</button>
+    <button >按钮6</button> -->
+
+<!-- ================================================================================== -->
+    <script type="text/javascript">
+    
+        var btn = document.getElementsByTagName("button");
+        for (var i=0; i< btn.length; i++ ){
+
+            btn[i].addEventListener('click', function(){
+                console.log("按钮" + i +"被点击了")
+            })
+        };
+
+
+
+
+        var info = ['姓名', '年龄', '身高', '体重']
+
+		var vue = new Vue({
+
+			el:'#vue_det',
+			data:{
+				name:'姓名',
+				position:'位置',
+				uss:false,
+                movice:['战车', '大结局啊', '大家阿娇'],
+                link:"#",
+                links:'',
+                isActive1:true,
+                isActive2:true,
+                isActive3:true,
+                currentIndex:100,
+                counter:0,
+                isUsername:true,
+                isShow:true,
+                user:{
+                    name:"张三",
+                    age:32,
+                    height:158,
+                    weight:'50KG'
+                },
+                info : ['姓名', '年龄', '身高', '体重'],
+                colorCode:['red', 'yellow', 'black'],
+                active1b:false
+            },           
+			methods:{
+				doubclick : function(){
+					console.log('666click_double');
+					return 'you are clicked double times';
+				},
+				target : function(){
+					return this.name + ' 买房北京 ';
+                },
+                butt:function(){
+                     this.isActive1 = !this.isActive1;
+                },
+                changeColor:function(index){
+                    this.currentIndex = index;
+                },
+                addCounter:function(counter, event){
+                    this.counter++;
+                    console.log(event);
+                    console.log(counter);
+                },
+                clickdiv:function(){
+                    console.log("divclick");
+                },
+                buttonClick:function(){
+                    console.log("buttonClick");
+                },
+                submitFun : function(){
+                    console.log("提交");
+                },
+                switch : function(){
+                    // this.isUsername = !this.isUsername ;
+                    // this.isShow = !this.isShow;
+                },
+                switch1 : function(){
+                    this.isUsername = !this.isUsername ;
+                    this.isShow = !this.isShow;
+                },
+                mclick:function(index){
+                    this.currentIndex = index;
+                    console.log(index);
+                },
+                changeMovice:function(){
+
+                    // this.movice.pop();
+                    // this.movice.push("shift");
+                    // this.movice.splice(1,1,"shift");//splice(index,howmany,item1,.....,itemX)
+                    // this.movice.shift("shift");
+                    // this.movice.unshift("shift");
+                    // this.movice.sort();
+                    // this.movice.reverse();
+
+                },
+                changeColors(){
+                    this.colorCode.push("white");
+                }
+			},
+			computed:{
+				addname: function(){
+					return this.name +" "+ this.position;
+				}
+			}
+
+        })
+        
+        
+        // var collli = document.getElementsByTagName("li");
+        // for (let i=0; i<collli.length; i++){
+        //     collli[i].addEventListener("click", function(){
+        //         console.log(i);
+        //         currentIndex = i;
+        //     })
+        // }
+
+
+	</script>
+</body>
+</html>

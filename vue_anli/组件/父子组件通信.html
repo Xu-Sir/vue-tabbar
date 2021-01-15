@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<script src="../gouwuche/js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id='app'>
+
+        <!-- <temp1 :movicecoll="movice"></temp1> -->
+
+        <temp1 ></temp1>
+    </div>
+
+
+
+    <script type="text/x-template" id="scrtemp1">
+        <div>
+            <h4>标签2</h4>
+            <p> 内容有许多2</p>
+            <p> 内容有许多222</p>
+            <p> 内容有许多3333</p>
+            <p> 内容有许多44444</p>
+            <!-- 展示父组件传递过来的数据 -->
+            <div>{{movicess}}</div> 
+            <div>{{message2}}</div> 
+            <div>{{message3}}</div> 
+            <!-- 父子组件双向绑定 -->
+            <input type='text' v-model='message3'>
+            <!-- 向父组件发送数据的点击事件 -->
+            <button @click="djsj">点击事件</button>
+            <br>
+            <br>
+            <label v-for="item in movicec1" @click="labelc1(item)">
+                <button>{{item}}</button>
+            </label>
+        </div>
+    </script>
+
+
+    <template id="temp1" >
+        <div>
+            <h4>标签2</h4>
+            <p> 内容有许多2</p>
+            <p> 内容有许多222</p>
+            <p> 内容有许多3333</p>
+            <p> 内容有许多44444</p>
+            <!-- <ul v-for='item in movice2'>
+                <li>{{item}}</li>
+            </ul>
+            <div>{{movicecoll}}</div> -->
+            <div>{{movice}}</div>
+            <!-- 绑定movice给子组件 -->
+            <!-- <srctemp2 :message2="message" ></srctemp2> -->
+            <!-- 监听子组件发射的事件 -->
+            <srctemp2 :message2="message" 
+            @fasheshijian1="jiantingc1"
+            @labelc3top="jiantingc2(arguments)"></srctemp2>
+            <h4>{{message}}</h4>
+            <!-- <srctemp2 :movicess="movice"></srctemp2> -->
+        </div>
+    </template>
+
+    <script>
+
+        // Vue.component('srctemp2', {
+        //     template:'#scrtemp1'
+        // })
+
+        var vue = new Vue({
+
+            el:'#app',
+            data:{
+                // movice:['大多数', '恩戈格', '大风v', '客家话']
+            },
+            components:{
+               temp1:{
+                   template:'#temp1'
+                   ,components:{
+                        srctemp2:{
+                            template:'#scrtemp1'
+                            // ,props:['movicess']//接收父组件绑定传过来的数据  数组类型接受
+                            ,props:{//对象类型接收
+                                // movicess:Array//设置类型
+                                movicess:{
+                                    // required:true,//必要
+                                    type:Array,//设置类型
+                                    // default:[],//返回空数组，低版本
+                                    default:function(){//返回空数组，高版本
+                                        return [];
+                                    }
+                                },
+                                message2:{
+                                    type:String,
+                                    // required:true,
+                                    default:"",
+                                    validator: function (value) {//校验传来的参数
+                                        return ["消息","信息"].indexOf(value) != -1;
+                                    }
+                                }
+                            }
+                            ,methods:{//发送点击事件给父组件
+                                djsj(){
+                                    console.log("子组件点击")
+                                    this.$emit('fasheshijian1');//发送点击事件给父组件
+                                },
+                                labelc1(item){
+                                    console.log(item);
+
+                                    this.$emit("labelc3top",item, 3)
+                                }
+                            }
+                            ,data(){
+                                return{
+                                    movicec1:['大多数', '恩戈格', '大风v', '客家话']
+                                    ,message3:this.message2
+                                }
+                            }
+                            ,watch:{
+                                message3(newVale, oldValue){
+                                    console.log('新值监听'+ newVale);
+                                    console.log('旧值监听'+ oldValue);
+                                }
+                            }
+                        }
+                   },
+                //    props:["movicecoll"],
+                   data(){
+                       return {
+                           movice:['大多数', '恩戈格', '大风v', '客家话'],
+                           message:"消息"
+                       }
+                   }
+                   ,methods:{
+                    jiantingc1(){
+                        console.log("监听到了子组件")
+                    }
+                    ,jiantingc2(item){
+                        console.log(item[0])
+                        console.log(item[1])
+                    }
+                   }
+               }
+
+            }
+
+        })
+
+    </script>
+
+</body>
+
+</html>

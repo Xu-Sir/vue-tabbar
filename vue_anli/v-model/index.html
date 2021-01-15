@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"></meta>
+    <title>v-model用例</title>
+
+    <script src="../gouwuche/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- <input type="text" v-model.lazy.trim="message"> -->
+        <!-- <input type="text" v-model.trim="message"> -->
+        <!-- <input type="text" :value="message" @input="message = $event.target.value"> -->
+        <!-- <h4>{{message}}</h4> -->
+        <!-- <input type="text" v-model.number="age">
+        <h4>{{age}}</h4> -->
+
+        <!-- <label for="male">
+            <input type="radio"  id="male"   v-model="sex" value="男">男
+        </label>
+        <label for="female">
+            <input type="radio"  id="female"   v-model="sex" value="女" >女
+        </label>
+
+        <h4>选择的性别是: {{sex}}</h4>
+
+        <label for='agress'>
+            <input type="checkbox" id="agress" v-model="isAgree">同意协议
+        </label>
+        <br>
+        <button :disabled="!isAgree">提交</button> -->
+
+        <!-- <br> -->
+    
+        
+        <!-- <input type="checkbox" value="水杯" v-model="myStuff">水杯
+        <input type="checkbox" value="茶壶" v-model="myStuff">茶壶
+        <input type="checkbox" value="花" v-model="myStuff">花
+        <input type="checkbox" value="书" v-model="myStuff">书
+
+        <h4>我的物品：{{myStuff}}</h4> -->
+
+        <!-- <select name="abc" v-model="fruit">
+            <option value="苹果">苹果</option>
+            <option value="榴莲">榴莲</option>
+            <option value="香蕉">香蕉</option>
+            <option value="橘子">橘子</option>
+        </select>
+        <h4>水果： {{fruit}}</h4> -->
+        <!-- <select name="abcd" v-model="fruits" multiple>
+            <option value="苹果">苹果</option>
+            <option value="榴莲">榴莲</option>
+            <option value="香蕉">香蕉</option>
+            <option value="橘子">橘子</option>
+        </select>
+        <h4>水果： {{fruits}}</h4> -->
+
+        <label v-for="item in bag" :for="item">
+            <input type="checkbox" :value="item" :id="item" v-model="bags">{{item}}
+        </label>
+        <h4>{{bags}}</h4>
+
+
+
+    </div>
+
+
+
+
+
+    <script >
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message: "这是信息",
+                sex: "女",
+                isAgree: false,
+                myStuff: [],
+                fruit: "香蕉",
+                fruits:[],
+                age:3,
+                bag:["书都是", "笔的萨芬", "碗氛围"],
+                bags:[]
+            },
+            methods:{
+                inputVlaue(event){
+                    console.log(event.target.value)
+                }
+            }
+
+
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>
