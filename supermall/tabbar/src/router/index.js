@@ -39,12 +39,12 @@ const router = new VueRouter({
     routes,
     mode:'history'//默认hash模式 切换成history模式
 })
-var aaa = true
+// var aaa = true
 // 监听路由跳转    导航卫士  前置钩子 前置守卫
 router.beforeEach((to, from, next) => {
   // console.log("导航卫士")
   // matched[0]永远取第一个 这样就算有子路由嵌套  还是只显示主路由
-  // document.title = to.matched[0].meta.title
+  document.title = to.matched[0].meta.title
   // next({name:'category'})
   // 要判断当前的路径 最后要调用next()  否则陷入死循环
   // if(to.path !== '/home' && aaa){

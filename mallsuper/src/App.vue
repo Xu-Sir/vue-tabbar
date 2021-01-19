@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <router-view/>
     <tabbar>
       <tab-bar-item path="/home" textclo="deeppink">
         <img  src="~assets/img/tabbar/home_active.svg" alt="" slot="item-icon-active">
@@ -40,11 +41,11 @@ export default {
   },
   components: {
     Tabbar,
-    TabBarItem,
+    TabBarItem
   }
 }
 </script>
 
 <style>
-@import 'assets/css/base.css';
+  @import 'assets/css/base.css';
 </style>

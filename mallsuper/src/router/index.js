@@ -40,7 +40,7 @@ const router = new VueRouter({
     mode:'history'//默认hash模式 切换成history模式
 })
 // 监听路由跳转    导航卫士  前置钩子 前置守卫
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
   // console.log("导航卫士")
   // matched[0]永远取第一个 这样就算有子路由嵌套  还是只显示主路由
   // document.title = to.matched[0].meta.title
@@ -50,6 +50,12 @@ router.beforeEach((to, from, next) => {
   //   next('/home')
   //   aaa = false
   // }else
+//   next()
+// })
+
+router.beforeEach((to, from, next) => {
+  document.title = to.matched[0].meta.title
+  
   next()
 })
 

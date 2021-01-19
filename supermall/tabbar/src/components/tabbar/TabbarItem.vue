@@ -1,6 +1,6 @@
 // 这里的模板是用来做通用item插槽的， 具体的内容 在调用时候填充，整个这个item是一个通用模板
 <template>
-<!-- 一个根div 命名class 用来样式渲染 -->
+    <!-- 一个根div 命名class 用来样式渲染 -->
     <div class="tab-bar-item" @click="clitab" id="TabBarItem">
         <!-- 两个插槽 一个图片一个文字 占位  实际调用的地方填充 -->
         <div v-if="!isActive"><slot name="item-icon"></slot></div>
